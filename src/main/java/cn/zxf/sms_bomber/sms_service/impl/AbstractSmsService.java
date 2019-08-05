@@ -31,6 +31,7 @@ public abstract class AbstractSmsService implements SmsService {
 
     @Override
     public SendResult send(String mobile) {
+        log.info("利用[{}]发送短信到[{}]", this.domain, mobile);
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .addInterceptor(
                         new HttpLoggingInterceptor((msg) -> log.info(msg))
