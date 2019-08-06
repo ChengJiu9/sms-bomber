@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.io.IOException;
 
@@ -35,10 +36,11 @@ public abstract class AbstractSmsService implements SmsService {
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .addInterceptor(
                         new HttpLoggingInterceptor((msg) -> log.info(msg))
-                                .setLevel(HttpLoggingInterceptor.Level.BASIC)
+                                .setLevel(HttpLoggingInterceptor.Level.HEADERS)
                 );
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(this.baseUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())
                 .build();
