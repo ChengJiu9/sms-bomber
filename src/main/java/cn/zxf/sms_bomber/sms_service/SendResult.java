@@ -3,6 +3,8 @@ package cn.zxf.sms_bomber.sms_service;
 import lombok.Data;
 
 /**
+ * 发送结果
+ * <p>
  * Created by zengxf on 2019/8/5.
  */
 @Data
