@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -24,8 +23,8 @@ public class LieLuoBoService extends AbstractSmsService implements SmsService {
     }
 
     @Override
-    public void send(String mobile, Retrofit retrofit, SendResult result) throws IOException {
-        ApiService service = retrofit.create(ApiService.class);
+    public void send(String mobile, SendResult result) throws IOException {
+        ApiService service = super.create(ApiService.class);
         Request request = new Request(mobile);
         Call<Result> call = service.send(request, System.currentTimeMillis());
         Response<Result> res = call.execute();

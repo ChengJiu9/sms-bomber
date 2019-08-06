@@ -17,8 +17,12 @@ import java.io.IOException;
 @Slf4j
 public abstract class AbstractSmsService implements SmsService {
 
-    private final String domain;
-    private final String baseUrl;
+    protected final String
+            domain,
+            baseUrl;
+
+    protected Retrofit retrofit;
+    protected Object service;
 
     public AbstractSmsService(String domain, String baseUrl) {
         this.domain = domain;
@@ -33,6 +37,22 @@ public abstract class AbstractSmsService implements SmsService {
     @Override
     public SendResult send(String mobile) {
         log.info("利用[{}]发送短信到[{}]", this.domain, mobile);
+        this.buildRetrofit();
+        SendResult result = new SendResult();
+        try {
+            this.send(mobile, result);
+            result.setSign(SendResult.Sign.SUCCESS);
+        } catch (IOException e) {
+            log.error("猎萝卜发送短信失败，手机号[{}]", mobile, e);
+            result.setSign(SendResult.Sign.ERROR);
+            result.setErrorMsg(e.getMessage());
+        }
+        return result;
+    }
+
+    protected Retrofit buildRetrofit() {
+        if (this.retrofit != null)
+            return this.retrofit;
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .addInterceptor(
                         new HttpLoggingInterceptor((msg) -> log.info(msg))
@@ -44,18 +64,15 @@ public abstract class AbstractSmsService implements SmsService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client.build())
                 .build();
-        SendResult result = new SendResult();
-        try {
-            this.send(mobile, retrofit, result);
-            result.setSign(SendResult.Sign.SUCCESS);
-        } catch (IOException e) {
-            log.error("猎萝卜发送短信失败，手机号[{}]", mobile, e);
-            result.setSign(SendResult.Sign.ERROR);
-            result.setErrorMsg(e.getMessage());
-        }
-        return result;
+        return this.retrofit = retrofit;
     }
 
-    public abstract void send(String mobile, Retrofit retrofit, SendResult result) throws IOException;
+    protected <T> T create(final Class<T> service) {
+        if (this.service != null)
+            return (T) this.service;
+        return (T) (this.service = this.retrofit.create(service));
+    }
+
+    protected abstract void send(String mobile, SendResult result) throws IOException;
 
 }

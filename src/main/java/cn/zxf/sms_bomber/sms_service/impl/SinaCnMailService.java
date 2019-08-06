@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.HeaderMap;
@@ -29,8 +28,8 @@ public class SinaCnMailService extends AbstractSmsService implements SmsService 
     }
 
     @Override
-    public void send(String mobile, Retrofit retrofit, SendResult result) throws IOException {
-        ApiService service = retrofit.create(ApiService.class);
+    public void send(String mobile, SendResult result) throws IOException {
+        ApiService service = super.create(ApiService.class);
         Map<String, String> headers = Map.of(
                 "origin", "https://mail.sina.com.cn",
                 "referer", "https://mail.sina.com.cn/register/regmail.php",
