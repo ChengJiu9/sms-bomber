@@ -7,14 +7,11 @@ import org.junit.Test;
  * Created by zengxf on 2019/8/5.
  */
 @Slf4j
-public class TestLieLuoBoService {
+public class TestLieLuoBoService extends AbstractTestService {
 
     @Test
     public void test() {
-        String mobile = "17120248814";
-        SmsService service = SmsServiceEnum.LieLuoBo.service;
-        SendResult res = service.send(mobile);
-        log.info("domain: {}, mobile: {}, 是否成功：{}, res: {}", service.domain(), mobile, res.sendOk(), res);
+        super.test("17120248814", SmsServiceEnum.LieLuoBo);
     }
 
 }
