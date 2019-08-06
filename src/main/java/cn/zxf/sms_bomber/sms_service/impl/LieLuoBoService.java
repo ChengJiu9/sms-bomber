@@ -51,9 +51,14 @@ public class LieLuoBoService extends AbstractSmsService implements SmsService {
 
     @Data
     static class Result implements SendResult.ApiResult {
-        Boolean body;
+        boolean body;
         Integer code;
         String msg;
+
+        @Override
+        public boolean sendOk() {
+            return body;
+        }
     }
 
 }

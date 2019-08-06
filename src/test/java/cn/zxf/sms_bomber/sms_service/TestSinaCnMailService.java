@@ -14,7 +14,7 @@ public class TestSinaCnMailService {
         String mobile = "17120248813";
         SmsService service = SmsServiceEnum.SinaCnMail.service;
         SendResult res = service.send(mobile);
-        log.info("domain: {}, mobile: {}, res: {}", service.domain(), mobile, res);
+        log.info("domain: {}, mobile: {}, 是否成功：{}, res: {}", service.domain(), mobile, res.sendOk(), res);
     }
 
 }

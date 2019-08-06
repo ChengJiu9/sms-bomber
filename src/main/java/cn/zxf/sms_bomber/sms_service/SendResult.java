@@ -16,6 +16,12 @@ public class SendResult {
     public enum Sign {ERROR, SUCCESS}
 
     public interface ApiResult {
+        /*** 第三方网站发送是否 OK */
+        boolean sendOk();
+    }
+
+    public boolean sendOk() {
+        return res != null && res.sendOk();
     }
 
 }

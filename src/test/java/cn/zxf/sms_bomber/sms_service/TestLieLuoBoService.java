@@ -14,7 +14,7 @@ public class TestLieLuoBoService {
         String mobile = "17120248814";
         SmsService service = SmsServiceEnum.LieLuoBo.service;
         SendResult res = service.send(mobile);
-        log.info("domain: {}, mobile: {}, res: {}", service.domain(), mobile, res);
+        log.info("domain: {}, mobile: {}, 是否成功：{}, res: {}", service.domain(), mobile, res.sendOk(), res);
     }
 
 }

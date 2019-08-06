@@ -41,8 +41,8 @@ public class SinaCnMailService extends AbstractSmsService implements SmsService 
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                result.setHttpStatus(response.code());
                 if (response.isSuccessful()) {
-                    result.setHttpStatus(response.code());
                     String body = response.body();
                     log.info("body: {}", body);
                     Result res = new Gson().fromJson(body, Result.class);
@@ -78,10 +78,15 @@ public class SinaCnMailService extends AbstractSmsService implements SmsService 
 
     @Data
     static class Result implements SendResult.ApiResult {
-        Boolean result;
+        boolean result;
         Integer code;
         String msg;
         Object data;
+
+        @Override
+        public boolean sendOk() {
+            return result;
+        }
     }
 
 }
