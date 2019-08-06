@@ -13,6 +13,7 @@ public class SendResult {
     int httpStatus;
     ApiResult res;
 
+    /*** 与第三方网站通信结果标志 */
     public enum Sign {ERROR, SUCCESS}
 
     public interface ApiResult {
