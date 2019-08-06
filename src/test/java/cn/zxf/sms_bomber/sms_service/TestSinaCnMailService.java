@@ -11,7 +11,7 @@ public class TestSinaCnMailService extends AbstractTestService {
 
     @Test
     public void test() {
-        super.test("17120248813", SmsServiceEnum.SinaCnMail);
+        super.test(SmsServiceEnum.SinaCnMail);
     }
 
 }

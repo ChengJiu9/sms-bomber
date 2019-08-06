@@ -11,7 +11,7 @@ public class TestHunterPlusService extends AbstractTestService {
 
     @Test
     public void test() {
-        super.test("17120248813", SmsServiceEnum.HunterPlus);
+        super.test(SmsServiceEnum.HunterPlus);
     }
 
 }

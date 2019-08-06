@@ -11,7 +11,7 @@ public class TestLieLuoBoService extends AbstractTestService {
 
     @Test
     public void test() {
-        super.test("17120248814", SmsServiceEnum.LieLuoBo);
+        super.test(SmsServiceEnum.LieLuoBo);
     }
 
 }
