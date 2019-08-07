@@ -1,8 +1,6 @@
 package cn.zxf.sms_bomber.sms_service;
 
-import cn.zxf.sms_bomber.sms_service.impl.HunterPlusService;
-import cn.zxf.sms_bomber.sms_service.impl.LieLuoBoService;
-import cn.zxf.sms_bomber.sms_service.impl.SinaCnMailService;
+import cn.zxf.sms_bomber.sms_service.impl.*;
 import lombok.AllArgsConstructor;
 
 /**
@@ -16,8 +14,18 @@ public enum SmsServiceEnum {
     LieLuoBo(new LieLuoBoService()),
     HunterPlus(new HunterPlusService()),
     SinaCnMail(new SinaCnMailService()),
+    PinDuoDuo(new PinDuoDuoService()),
+    @Deprecated JD(new JDService(), true),
+    @Deprecated QQ(new QQService(), true),
+    @Deprecated ChSi(new ChSiService(), true),
+    @Deprecated Fang(new FangService(), true),
     ;
 
     public final SmsService service;
+    public final boolean deprecated;
+
+    SmsServiceEnum(SmsService service) {
+        this(service, false);
+    }
 
 }
