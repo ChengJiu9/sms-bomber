@@ -15,4 +15,10 @@ public class TestReadFile {
         System.out.println(mobiles);
     }
 
+    @Test
+    public void testVos() {
+        List<MobileVo> mobiles = ReadFile.mobileVos();
+        mobiles.forEach(System.out::println);
+    }
+
 }

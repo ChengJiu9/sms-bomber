@@ -55,7 +55,7 @@ public class HunterPlusService extends AbstractSmsService implements SmsService 
 
         @Override
         public boolean sendOk() {
-            return "SUCCESS".equals(msg);
+            return "\"SUCCESS\"".equals(msg);
         }
     }
 

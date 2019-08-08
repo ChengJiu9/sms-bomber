@@ -15,17 +15,24 @@ public enum SmsServiceEnum {
     HunterPlus(new HunterPlusService()),
     SinaCnMail(new SinaCnMailService()),
     PinDuoDuo(new PinDuoDuoService()),
-    @Deprecated JD(new JDService(), true),
-    @Deprecated QQ(new QQService(), true),
-    @Deprecated ChSi(new ChSiService(), true),
-    @Deprecated Fang(new FangService(), true),
+    @Deprecated JD(new JDService()),
+    @Deprecated QQ(new QQService()),
+    @Deprecated ChSi(new ChSiService()),
+    @Deprecated Fang(new FangService()),
     ;
 
     public final SmsService service;
-    public final boolean deprecated;
 
-    SmsServiceEnum(SmsService service) {
-        this(service, false);
+
+    public boolean deprecated() {
+        try {
+            Deprecated deprecated = SmsServiceEnum.class
+                    .getDeclaredField(this.name())
+                    .getAnnotation(Deprecated.class);
+            return deprecated != null;
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
     }
 
 }

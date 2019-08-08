@@ -1,5 +1,6 @@
 package cn.zxf.sms_bomber.sms_service.impl;
 
+import cn.zxf.sms_bomber.Variable;
 import cn.zxf.sms_bomber.sms_service.SendResult;
 import cn.zxf.sms_bomber.sms_service.SmsService;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,7 @@ public abstract class AbstractSmsService implements SmsService {
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .addInterceptor(
                         new HttpLoggingInterceptor((msg) -> log.info(msg))
-                                .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+                                .setLevel(Variable.logLevel)
                 );
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(this.baseUrl)
